@@ -1,6 +1,7 @@
 package main
 
 import (
+	"os"
 	"plugin"
 
 	// This line causes the issue.
@@ -8,5 +9,5 @@ import (
 )
 
 func main() {
-	plugin.Open("plugin.so")
+	plugin.Open(os.Args[1])
 }

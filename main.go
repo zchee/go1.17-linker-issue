@@ -2,13 +2,23 @@ package main
 
 import (
 	"fmt"
+	"log"
+	"os"
 	"plugin"
-	"runtime"
 
-	// This line causes the issue.
 	_ "google.golang.org/grpc"
 )
 
 func main() {
-	plugin.Open(fmt.Sprintf("plugin-%s.so", runtime.Version()))
+	p, err := plugin.Open(os.Args[1])
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	sym, err := p.Lookup("Conn")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Println(sym)
 }

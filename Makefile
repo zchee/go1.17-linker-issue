@@ -24,11 +24,11 @@ buildgo:
 
 .PHONY: run
 run: plugin
-	GOTRACEBACK=all ${GO} run -v -x $(strip ${GO_FLAGS}) -gcflags=$(strip ${GO_GCFLAGS}) -ldflags='$(strip ${GO_LDFLAGS})' main.go
+	GOTRACEBACK=all ${GO} run -v -x $(strip ${GO_FLAGS}) -gcflags=$(strip ${GO_GCFLAGS}) -ldflags='$(strip ${GO_LDFLAGS})' main.go ./plugin/plugin-${GO_VERSION}.so
 
 .PHONY: plugin
 plugin:
-	${GO} build -buildmode=plugin -o plugin-${GO_VERSION}.so $(strip ${GO_FLAGS}) -gcflags=$(strip ${GO_GCFLAGS}) -ldflags='$(strip ${GO_LDFLAGS})' ./plugin
+	${GO} build -buildmode=plugin -o ./plugin/plugin-${GO_VERSION}.so $(strip ${GO_FLAGS}) -gcflags=$(strip ${GO_GCFLAGS}) -ldflags='$(strip ${GO_LDFLAGS})' ./plugin
 
 .PHONY: build
 build: plugin
@@ -40,4 +40,4 @@ nm: build
 
 .PHONY: nm/so
 nm/so: plugin
-	${GO} tool nm -sort name -type ./plugin-${GO_VERSION}.so
+	${GO} tool nm -sort name -type ./plugin/plugin-${GO_VERSION}.so

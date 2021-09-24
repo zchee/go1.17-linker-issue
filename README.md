@@ -22,18 +22,3 @@ runtime.throw({0xa1aab8, 0xc00014e880})
 ...
 exit status 2
 ```
-
-### with scenarigo
-
-```shell
-$ go install github.com/zoncoen/scenarigo/cmd/scenarigo@v0.8.0
-
-$ go build -buildmode=plugin -o plugin.so ./plugin
-
-$ scenarigo run test.yaml
-fatal error: unreachable method called. linker bug?
-
-goroutine 21 [running]:
-runtime.throw({0xcb5e67, 0xc000171980})
-...
-```

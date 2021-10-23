@@ -21,7 +21,7 @@ next_commit:
 	git -C /usr/local/go.plugin clean -xfd
 
 .PHONY: buildgo
-buildgo: next_commit
+buildgo:
 	cd /usr/local/go.plugin/src && \
 		GOROOT_BOOTSTRAP=~/sdk/gotip GOGC=off ./make.bash -a -no-banner && \
 		cd ${CURDIR}
